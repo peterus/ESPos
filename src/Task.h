@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-constexpr uint32_t STACK_SIZE = 4096;
+constexpr uint32_t DEFAULT_STACK_SIZE = 4096;
 
 class TaskBase {
 public:
@@ -15,7 +15,7 @@ protected:
 
 class Task : public TaskBase {
 public:
-  Task(const char *name, UBaseType_t priority, const uint32_t stackDepth = STACK_SIZE);
+  Task(const char *name, UBaseType_t priority, const uint32_t stackDepth = DEFAULT_STACK_SIZE);
 
   void start();
 
@@ -31,7 +31,7 @@ private:
 
 class LoopingTask : public Task {
 public:
-  LoopingTask(const char *name, UBaseType_t priority, unsigned int waitTime = 100, const uint32_t stackDepth = STACK_SIZE);
+  LoopingTask(const char *name, UBaseType_t priority, unsigned int waitTime = 100, const uint32_t stackDepth = DEFAULT_STACK_SIZE);
 
 private:
   void task() override;
