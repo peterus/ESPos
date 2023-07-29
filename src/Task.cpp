@@ -1,3 +1,4 @@
+#ifdef ARDUINO
 #include "Task.h"
 
 TaskBase::~TaskBase() {
@@ -24,3 +25,4 @@ void LoopingTask::task() {
     loop();
   }
 }
+#endif
