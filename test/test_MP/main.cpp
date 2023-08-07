@@ -99,7 +99,7 @@ TEST(ModelPoint_test, locking) {
   ASSERT_FALSE(value);
 }
 
-#if defined(ARDUINO)
+#ifdef ARDUINO
 #include <Arduino.h>
 
 void setup() {
@@ -117,6 +117,7 @@ void loop() {
 
 #else
 int main(int argc, char **argv) {
+
   ::testing::InitGoogleTest(&argc, argv);
 
   if (RUN_ALL_TESTS())
