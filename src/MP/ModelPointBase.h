@@ -17,6 +17,8 @@ public:
 
   bool         isLocked() const override;
   unsigned int setLockState(LockRequest lockRequest) override;
+  unsigned int removeLock() override;
+  unsigned int applyLock() override;
 
 protected:
   bool _isValid;

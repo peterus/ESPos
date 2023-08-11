@@ -1,6 +1,8 @@
 #ifndef I_MODEL_POINT_H_
 #define I_MODEL_POINT_H_
 
+#include "SubscriberApi.h"
+
 enum LockRequest {
   eNO_REQUEST,
   eLOCK,
@@ -22,13 +24,8 @@ public:
 
   virtual bool         isLocked() const                      = 0;
   virtual unsigned int setLockState(LockRequest lockRequest) = 0;
-
-  unsigned int removeLock() {
-    return setLockState(eUNLOCK);
-  }
-  unsigned int applyLock() {
-    return setLockState(eLOCK);
-  }
+  virtual unsigned int removeLock()                          = 0;
+  virtual unsigned int applyLock()                           = 0;
 };
 
 #endif

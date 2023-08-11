@@ -44,6 +44,14 @@ unsigned int ModelPointBase::setLockState(LockRequest lockRequest) {
   return _updateSequenceNumber();
 }
 
+unsigned int ModelPointBase::removeLock() {
+  return setLockState(eUNLOCK);
+}
+
+unsigned int ModelPointBase::applyLock() {
+  return setLockState(eLOCK);
+}
+
 unsigned int ModelPointBase::_updateSequenceNumber() {
   _sequenceNumber++;
   return _sequenceNumber;
