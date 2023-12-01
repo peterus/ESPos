@@ -1,7 +1,7 @@
 #ifndef I_MODEL_POINT_H_
 #define I_MODEL_POINT_H_
 
-#include "SubscriberApi.h"
+#include "ISubscriber.h"
 
 enum LockRequest {
   eNO_REQUEST,
