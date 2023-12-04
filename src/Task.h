@@ -1,6 +1,8 @@
 #ifndef TASK_H_
 #define TASK_H_
 
+#ifndef ESPTUX
+
 #include <Arduino.h>
 
 constexpr uint32_t DEFAULT_STACK_SIZE = 4096;
@@ -42,4 +44,5 @@ private:
   const unsigned int _waitTime;
 };
 
+#endif
 #endif

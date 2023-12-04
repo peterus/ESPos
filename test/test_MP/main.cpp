@@ -13,7 +13,7 @@ void loop() {
   if (RUN_ALL_TESTS())
     ;
 
-  delay(1000);
+  delay(10000);
 }
 
 #else
