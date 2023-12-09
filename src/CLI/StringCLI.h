@@ -7,7 +7,8 @@
 #include <cstring>
 #include <string>
 typedef std::string String;
-inline String       F(String s) {
+
+inline String F(String s) {
   return s;
 };
 #endif
