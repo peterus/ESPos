@@ -1,6 +1,6 @@
 #include "Argument.h"
 
-Argument::Argument(ARGUMENT_TYPE type, const String &name, const String &help) : _type(type), _name(name), _help(help) {
+Argument::Argument(ARGUMENT_TYPE type, const String &name, const String &help) : _type(type), _name(String("--") + name), _help(help) {
 }
 
 Argument::~Argument() {
@@ -10,20 +10,56 @@ String Argument::getName() const {
   return _name;
 }
 
+String Argument::getHelp() const {
+  return _help;
+}
+
 ARGUMENT_TYPE Argument::getType() const {
   return _type;
+}
+
+bool Argument::isSet() const {
+  return _isSet;
+}
+
+void Argument::set(bool isSet) {
+  _isSet = isSet;
 }
 
 IntegerArgument::IntegerArgument(const String &name, const String &help) : Argument(ARGUMENT_TYPE::INTEGER, name, help) {
 }
 
-int IntegerArgument::getValue(const String &arg) {
-  return 0;
+void IntegerArgument::reset() {
+  _value = 0;
+}
+
+long IntegerArgument::getValue() {
+  return _value;
+}
+
+String IntegerArgument::getAsString() const {
+  return String(_value);
+}
+
+void IntegerArgument::parse(Stream &stream, const String &argument) {
+  _value = argument.toInt();
 }
 
 StringArgument::StringArgument(const String &name, const String &help) : Argument(ARGUMENT_TYPE::STRING, name, help) {
 }
 
-String StringArgument::getValue(const String &arg) {
-  return arg;
+void StringArgument::reset() {
+  _value = "";
+}
+
+String StringArgument::getValue() {
+  return _value;
+}
+
+String StringArgument::getAsString() const {
+  return _value;
+}
+
+void StringArgument::parse(Stream &stream, const String &argument) {
+  _value = argument;
 }

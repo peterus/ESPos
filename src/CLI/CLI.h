@@ -1,6 +1,7 @@
 #ifndef CLI_H_
 #define CLI_H_
 
+#include <deque>
 #include <list>
 
 #include "Command.h"
@@ -8,17 +9,27 @@
 
 class CLI {
 public:
-  CLI(const String &appName, const char promt = '>');
+  CLI(Stream &stream, const String &appName, bool echo = true, const char prompt = '>');
 
   void addCommand(Command *const command);
 
   void start();
+  void loop();
 
 private:
+  Stream      &_stream;
   const String _appName;
-  const char   _promt;
+  const char   _prompt;
+  bool         _echo;
 
   std::list<Command *> _commands;
+  String               _commandLine;
+
+  void printPrompt();
+  void processStream();
+  void parse(Stream &stream, std::deque<String> &arguments);
 };
+
+std::deque<String> getStringSplitted(String line);
 
 #endif
