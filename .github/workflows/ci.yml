@@ -67,7 +67,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Run PlatformIO Check
-        run: platformio check --fail-on-defect high --fail-on-defect medium --fail-on-defect low -e lora_board
+        run: platformio check --fail-on-defect high --fail-on-defect medium --fail-on-defect low
 
   native_unittesting:
     name: Run unit tests on native
