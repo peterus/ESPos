@@ -1,7 +1,7 @@
 #ifndef ARGUMENT_H_
 #define ARGUMENT_H_
 
-#include "StringCLI.h"
+#include <Arduino.h>
 
 enum ARGUMENT_TYPE {
   INTEGER,

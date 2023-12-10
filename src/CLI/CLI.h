@@ -4,8 +4,9 @@
 #include <deque>
 #include <list>
 
+#include <Arduino.h>
+
 #include "Command.h"
-#include "StringCLI.h"
 
 class CLI {
 public:

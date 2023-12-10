@@ -49,11 +49,11 @@ void HelpPrinter::printArg(Argument const *const argument, const unsigned int ma
   _stream.print("  ");
   _stream.print(argument->getName());
   if (argument->getType() == INTEGER) {
-    _stream.print(" INT");
+    _stream.print(" (INT)");
   } else if (argument->getType() == STRING) {
-    _stream.print(" STR");
+    _stream.print(" (STR)");
   }
-  for (unsigned int i = argument->getName().length() + 4; i < maxLength; i++) {
+  for (unsigned int i = argument->getName().length() + 6; i < maxLength; i++) {
     _stream.print(" ");
   }
   _stream.println(argument->getHelp());
