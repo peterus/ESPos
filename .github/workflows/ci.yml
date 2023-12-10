@@ -106,5 +106,5 @@ jobs:
           owner: peterus
           repo: ESP-Boards
           #github_token: ${{ secrets.PAT }}
-          workflow_file_name: espos.yml
+          workflow_file_name: ESPos.yml
           github_user: peterus
