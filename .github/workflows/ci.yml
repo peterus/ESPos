@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         example: [examples/CLI, examples/Task]
+        environment: [native, ttgo-lora32]
     steps:
       - uses: actions/cache@v3
         with:
@@ -31,7 +32,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: build CI
-        run: platformio ci -c platformio.ini -l src ${{ matrix.example }}
+        run: platformio ci -c platformio.ini -l src -e ${{ matrix.environment }} ${{ matrix.example }}
 
   formatting-check:
     name: Formatting Check
@@ -48,6 +49,9 @@ jobs:
   cppcheck:
     name: Run cppcheck
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [native, ttgo-lora32]
     steps:
       - uses: actions/cache@v3
         with:
@@ -67,7 +71,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Run PlatformIO Check
-        run: platformio check --fail-on-defect high --fail-on-defect medium --fail-on-defect low
+        run: platformio check --fail-on-defect high --fail-on-defect medium --fail-on-defect low -e ${{ matrix.environment }}
 
   native_unittesting:
     name: Run unit tests on native
