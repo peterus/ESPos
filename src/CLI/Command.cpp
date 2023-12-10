@@ -31,9 +31,8 @@ void Command::parse(Stream &stream, std::deque<String> &arguments, std::list<Arg
 
   if (arguments.size() > 0 && arguments[0] == "help") {
     HelpPrinter helper(stream);
-    if (_subCommands.size() > 0) {
-      helper.printCommandList(_subCommands);
-    }
+    helper.printCommandList(_subCommands);
+
     if (_arguments.size() > 0) {
       helper.printArgumentList(_arguments);
     }
