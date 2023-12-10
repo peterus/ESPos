@@ -37,7 +37,7 @@ private:
 
 class IntegerArgument : public Argument {
 public:
-  IntegerArgument(const String &name, const String &help);
+  IntegerArgument(const String &name, const String &help, long default_value = 0);
 
   void reset() override;
   long getValue();
@@ -47,12 +47,13 @@ public:
   void parse(Stream &stream, const String &argument) override;
 
 private:
-  long _value;
+  const long _default_value;
+  long       _value;
 };
 
 class StringArgument : public Argument {
 public:
-  StringArgument(const String &name, const String &help);
+  StringArgument(const String &name, const String &help, const String &default_value = "");
 
   void   reset() override;
   String getValue();
@@ -62,7 +63,8 @@ public:
   void parse(Stream &stream, const String &argument) override;
 
 private:
-  String _value;
+  const String _default_value;
+  String       _value;
 };
 
 #endif
