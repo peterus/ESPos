@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "CLI.h"
 #include "HelpPrinter.h"
 

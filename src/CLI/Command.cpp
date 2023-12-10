@@ -1,5 +1,7 @@
-#include "Command.h"
+#include <algorithm>
+
 #include "CLI.h"
+#include "Command.h"
 #include "HelpPrinter.h"
 
 Command::Command(const String &name, const String &help) : _name(name), _help(help) {
