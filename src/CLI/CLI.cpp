@@ -65,13 +65,14 @@ void CLI::parse(Stream &stream, std::deque<String> &arguments) {
     return;
   }
 
-  for (auto command : _commands) {
-    if (command->getName() == cmd) {
-      arguments.pop_front();
-      std::list<Argument *> parsedArguments;
-      command->parse(stream, arguments, parsedArguments);
-      return;
-    }
+  auto found = std::find_if(_commands.begin(), _commands.end(), [&cmd](Command const *const command) {
+    return command->getName() == cmd;
+  });
+  if (found != _commands.end()) {
+    arguments.pop_front();
+    std::list<Argument *> parsedArguments;
+    (*found)->parse(stream, arguments, parsedArguments);
+    return;
   }
 
   _stream.print("command not found: ");

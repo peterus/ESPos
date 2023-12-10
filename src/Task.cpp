@@ -3,6 +3,9 @@
 
 #include "Task.h"
 
+TaskBase::TaskBase() : taskHandle(0) {
+}
+
 TaskBase::~TaskBase() {
 }
 

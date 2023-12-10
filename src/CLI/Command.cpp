@@ -42,14 +42,16 @@ void Command::parse(Stream &stream, std::deque<String> &arguments, std::list<Arg
   for (auto argument_iter = arguments.begin(); argument_iter != arguments.end(); argument_iter++) {
     if (argument_iter->startsWith("--")) {
       bool argument_found = false;
-      for (auto arg : _arguments) {
-        if (*argument_iter == arg->getName()) {
-          argument_iter++;
-          arg->parse(stream, *argument_iter);
-          argument_found = true;
-          break;
-        }
+
+      auto found = std::find_if(_arguments.begin(), _arguments.end(), [&argument_iter](Argument const *const arg) {
+        return *argument_iter == arg->getName();
+      });
+      if (found != _arguments.end()) {
+        argument_iter++;
+        (*found)->parse(stream, *argument_iter);
+        argument_found = true;
       }
+
       if (!argument_found) {
         stream.print("argument not found: ");
         stream.print(*argument_iter);
@@ -58,16 +60,15 @@ void Command::parse(Stream &stream, std::deque<String> &arguments, std::list<Arg
         return;
       }
     } else {
-      for (auto subcommand : _subCommands) {
-        if (*argument_iter == subcommand->getName()) {
-          argument_iter++;
-          std::deque<String> new_args(argument_iter, arguments.end());
-          for (auto arg : _arguments) {
-            parsedArguments.push_back(arg);
-          }
-          subcommand->parse(stream, new_args, parsedArguments);
-          return;
-        }
+      auto found = std::find_if(_subCommands.begin(), _subCommands.end(), [&argument_iter](Command const *const subcommand) {
+        return *argument_iter == subcommand->getName();
+      });
+      if (found != _subCommands.end()) {
+        argument_iter++;
+        std::deque<String> new_args(argument_iter, arguments.end());
+        std::copy(_arguments.begin(), _arguments.end(), std::back_inserter(parsedArguments));
+        (*found)->parse(stream, new_args, parsedArguments);
+        return;
       }
 
       stream.print("command not found: ");
@@ -78,8 +79,6 @@ void Command::parse(Stream &stream, std::deque<String> &arguments, std::list<Arg
     }
   }
 
-  for (auto arg : _arguments) {
-    parsedArguments.push_back(arg);
-  }
+  std::copy(_arguments.begin(), _arguments.end(), std::back_inserter(parsedArguments));
   run(parsedArguments);
 }

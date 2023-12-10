@@ -1,6 +1,6 @@
 #include "Argument.h"
 
-Argument::Argument(ARGUMENT_TYPE type, const String &name, const String &help) : _type(type), _name(String("--") + name), _help(help) {
+Argument::Argument(ARGUMENT_TYPE type, const String &name, const String &help) : _type(type), _name(String("--") + name), _help(help), _isSet(false) {
 }
 
 Argument::~Argument() {
@@ -26,7 +26,7 @@ void Argument::set(bool isSet) {
   _isSet = isSet;
 }
 
-IntegerArgument::IntegerArgument(const String &name, const String &help) : Argument(ARGUMENT_TYPE::INTEGER, name, help) {
+IntegerArgument::IntegerArgument(const String &name, const String &help) : Argument(ARGUMENT_TYPE::INTEGER, name, help), _value(0) {
 }
 
 void IntegerArgument::reset() {

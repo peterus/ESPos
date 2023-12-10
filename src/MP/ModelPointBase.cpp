@@ -24,9 +24,7 @@ bool ModelPointBase::isNotValid(unsigned int *seqNumPtr) const {
 
 unsigned int ModelPointBase::setInvalid(LockRequest lockRequest) {
   if (_testAndUpdateLock(lockRequest)) {
-    if (_isValid) {
-      _isValid = false;
-    }
+    _isValid = false;
   }
   return _updateSequenceNumber();
 }

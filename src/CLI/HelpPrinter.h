@@ -12,13 +12,13 @@ class HelpPrinter {
 public:
   HelpPrinter(Stream &stream);
 
-  void printCommandList(std::list<Command *> commands, const bool is_subcommand = true);
+  void printCommandList(const std::list<Command *> &commands, const bool is_subcommand = true);
   void printArgumentList(const std::list<Argument *> &commands);
 
 private:
   Stream &_stream;
 
-  template <class T> unsigned int calcMaxLength(std::list<T> printable, unsigned int startMaxLength) {
+  template <class T> unsigned int calcMaxLength(const std::list<T> &printable, unsigned int startMaxLength) {
     unsigned int maxLength = startMaxLength;
     for (auto command : printable) {
       unsigned int length = command->getName().length();

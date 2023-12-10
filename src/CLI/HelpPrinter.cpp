@@ -6,7 +6,7 @@
 HelpPrinter::HelpPrinter(Stream &stream) : _stream(stream) {
 }
 
-void HelpPrinter::printCommandList(std::list<Command *> commands, const bool is_subcommand) {
+void HelpPrinter::printCommandList(const std::list<Command *> &commands, const bool is_subcommand) {
   const unsigned int maxLength = calcMaxLength(commands, 4);
   if (is_subcommand) {
     _stream.println("all sub-commands:");
@@ -23,7 +23,7 @@ void HelpPrinter::printCommandList(std::list<Command *> commands, const bool is_
     }
     _stream.println("list all commands");
   }
-  for (auto command : commands) {
+  for (Command const *const command : commands) {
     printCmd(command, maxLength);
   }
 }
@@ -31,7 +31,7 @@ void HelpPrinter::printCommandList(std::list<Command *> commands, const bool is_
 void HelpPrinter::printArgumentList(const std::list<Argument *> &arguments) {
   const unsigned int maxLength = calcMaxLength(arguments, 0) + 4;
   _stream.println("all arguments:");
-  for (auto argument : arguments) {
+  for (Argument const *const argument : arguments) {
     printArg(argument, maxLength);
   }
 }

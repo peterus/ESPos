@@ -9,10 +9,11 @@ constexpr uint32_t DEFAULT_STACK_SIZE = 4096;
 
 class TaskBase {
 public:
+  TaskBase();
   virtual ~TaskBase();
 
 protected:
-  xTaskHandle taskHandle;
+  TaskHandle_t taskHandle;
 };
 
 class Task : public TaskBase {
