@@ -95,3 +95,14 @@ void Command::process_subcommand(Stream &stream, std::deque<String>::iterator &a
   stream.println();
   stream.println("use 'help' to list all commands");
 }
+
+Argument *Command::getArgumentByName(const String &name, std::list<Argument *> parsedArguments) {
+  auto found = std::find_if(parsedArguments.begin(), parsedArguments.end(), [&name](Argument const *const argument) {
+    return argument->getName() == name;
+  });
+
+  if (found != parsedArguments.end()) {
+    return *found;
+  }
+  return 0;
+}

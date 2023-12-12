@@ -15,6 +15,16 @@ public:
       Serial.print(" ");
       Serial.println(arg->getAsString());
     }
+
+    Serial.println("");
+    Argument *arg = getArgumentByName("--test", parsedArguments);
+    Serial.print(arg->getName());
+    Serial.print(" ");
+    Serial.println(arg->getAsString());
+    arg = getArgumentByName("--test1", parsedArguments);
+    Serial.print(arg->getName());
+    Serial.print(" ");
+    Serial.println(arg->getAsString());
   }
 };
 

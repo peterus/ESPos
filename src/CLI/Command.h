@@ -24,6 +24,8 @@ public:
 
   virtual void run(std::list<Argument *> parsedArguments) = 0;
 
+  Argument *getArgumentByName(const String &name, std::list<Argument *> parsedArguments);
+
 private:
   const String          _name;
   const String          _help;
