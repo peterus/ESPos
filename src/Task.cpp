@@ -26,7 +26,11 @@ LoopingTask::LoopingTask(const char *name, UBaseType_t priority, unsigned int wa
 void LoopingTask::task() {
   setup();
   while (true) {
+#ifdef portTICK_RATE_MS
     vTaskDelay(_waitTime / portTICK_RATE_MS);
+#else
+    vTaskDelay(_waitTime / portTICK_PERIOD_MS);
+#endif
     loop();
   }
 }
